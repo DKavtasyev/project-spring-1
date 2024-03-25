@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Список задач</title>
+</head>
+<body>
+
+<h2>Список всех задач</h2>
+
+<table border="1">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>Description</th>
+		<th>Status</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="t : ${tasks}">
+		<td th:text="${t.getId()}">Id</td>
+		<td th:text="${t.getDescription()}">Description</td>
+		<td th:text="${t.getStatus()}">Status</td>
+		<td>
+			<form th:method="GET" th:action="@{/task/{id}/edit(id=${t.getId()})}">
+				<input type="submit" value="Edit"/>
+			</form>
+		</td>
+		<td>
+			<form th:method="DELETE" th:action="@{/task/{id}(id=${t.getId()})}">
+				<input type="submit" value="Delete"/>
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<th style="text-align: left" colspan="3">Add new task:</th>
+	</tr>
+	<tr>
+		<td style="text-align: center">-</td>
+		<form th:method="POST" th:action="@{/task}" th:object="${task}">
+			<td>
+				<!--suppress HtmlFormInputWithoutLabel -->
+				<input type="text" th:field="*{description}"/>
+			</td>
+			<td>
+				<select th:object="${task}" th:field="*{status}">
+					<option th:each="s : ${statuses}" th:value="${s}"
+							th:text="${s.name()}"></option>
+				</select>
+			</td>
+			<td>
+				<input type="submit" value="Save">
+			</td>
+		</form>
+	</tr>
+	</tbody>
+</table>
+</body>
+</html>

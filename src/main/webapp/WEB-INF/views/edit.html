@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Редактирование</title>
+</head>
+<body>
+
+<h2>Редактирование задания</h2>
+<p th:text="'ID: ' + ${task.getId()}">ID</p>
+<form th:method="PATCH" th:action="@{/task/{id}(id=${task.getId()})}" th:object="${task}">
+	<p>
+		<label for="description">Description: </label>
+		<input type="text" th:field="*{description}" id="description"/><br>
+	</p>
+	<p>
+		<label for="status">Status: </label>
+		<select th:object="${task}" th:field="*{status}" id="status">
+			<option th:each="s : ${statuses}" th:value="${s}" th:text="${s.name()}"></option>
+		</select><br>
+	</p>
+	<p>
+		<input type="submit" value="Update"/>
+	</p>
+</form>
+
+</body>
+</html>
