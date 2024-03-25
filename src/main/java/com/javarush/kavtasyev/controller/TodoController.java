@@ -21,10 +21,12 @@ public class TodoController
 	}
 	
 	@GetMapping()
-	public String index(@ModelAttribute("task") Task task, Model model)
+	public String index(@ModelAttribute("task") Task task,
+						@RequestParam(value = "page", required = false) Integer page, Model model)
 	{
-		model.addAttribute("tasks", taskService.getAllTasks());
+		model.addAttribute("tasks", taskService.getAllTasks(page));
 		model.addAttribute("statuses", Status.values());
+		model.addAttribute("pages", taskService.getNumberOfPages());
 		return "index";
 	}
 	

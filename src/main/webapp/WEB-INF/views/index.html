@@ -56,5 +56,16 @@
 	</tr>
 	</tbody>
 </table>
+<p>
+	<hr>
+</p>
+<p>Page: </p>
+<table border="1">
+	<tr>
+		<td th:each="p : ${#numbers.sequence(1, pages)}" style="text-align: center" width="30" height="30">
+			<a th:href="@{/task(page=${p})}" th:text="${p}">?</a>
+		</td>
+	</tr>
+</table>
 </body>
 </html>

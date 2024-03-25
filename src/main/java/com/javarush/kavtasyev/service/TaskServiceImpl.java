@@ -28,9 +28,9 @@ public class TaskServiceImpl implements TaskService
 	}
 	
 	@Override
-	public List<Task> getAllTasks()
+	public List<Task> getAllTasks(Integer pageNumber)
 	{
-		return taskDAO.getAllTasks();
+		return taskDAO.getAllTasks(pageNumber);
 	}
 	
 	@Transactional
@@ -53,5 +53,11 @@ public class TaskServiceImpl implements TaskService
 	public void deleteTask(int id)
 	{
 		taskDAO.deleteTask(id);
+	}
+	
+	@Override
+	public int getNumberOfPages()
+	{
+		return taskDAO.getNumberOfPages();
 	}
 }
